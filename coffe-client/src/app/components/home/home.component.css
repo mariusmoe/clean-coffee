@@ -1,0 +1,30 @@
+mat-card {
+    margin: 8px;
+}
+.top-level {
+    display: flex;
+    flex-direction: column;
+}
+
+.fix-card {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+/* 
+.card-content {
+    display: flex;
+    justify-content: space-around;
+} */
+
+.clean-btn {
+    margin: 8px auto;
+}
+
+.history-btn {
+    margin: 20px auto; 
+}
+
+.card-text {
+    margin: 8px 0px 8px;
+}

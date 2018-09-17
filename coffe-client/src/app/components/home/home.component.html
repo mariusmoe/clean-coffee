@@ -1,0 +1,29 @@
+<div class="top-level">
+    <mat-toolbar class="top-bar">My App</mat-toolbar>
+  
+  <div>
+    <mat-card *ngFor="let fix of fixes | async | slice:0:1" class="fix-card">
+      <mat-chip-list>
+          <mat-chip color="primary" selected *ngIf="isOld(fix.timestamp)">Bra</mat-chip>
+          <mat-chip color="warn" selected *ngIf="!isOld(fix.timestamp)">Krise!</mat-chip>
+      </mat-chip-list>
+      <div>
+        <p class="card-text">Kaffemaskin sisst rengjort:</p>
+        {{ fix.timestamp | date:'d, MM, y, HH:mm:ss'}} | ({{timeSince(fix.timestamp)}} dager siden)
+      </div>
+    </mat-card>
+  </div>
+    
+  <button mat-raised-button color="primary" (click)="addFix()" class="clean-btn">Jeg rengjorde akkurat kaffetrakteren!</button>
+  
+  <button mat-fab (click)="toggleHiddenFixHistory()" class="history-btn">Historie</button>
+
+
+  <div [hidden]="hiddenFixHistory">
+      <mat-card *ngFor="let fix of fixes | async; let last = last" class="fix-card">
+          {{ fix.timestamp | date:'d, MM, y, HH:mm'}} | ({{timeSince(fix.timestamp)}} dager siden)
+      </mat-card>
+  </div>
+
+
+</div>
