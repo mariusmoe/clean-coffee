@@ -8,7 +8,8 @@ import {MatButtonModule,
   MatToolbarModule,
   MatCardModule,
   MatChipsModule,
-  MatTableModule} from '@angular/material';
+  MatTableModule,
+  MatDialogModule} from '@angular/material';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -32,6 +33,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatCardModule,
     MatChipsModule,
     MatTableModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
