@@ -15,14 +15,15 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent, DialogConfirmCleanCoffee } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DialogConfirmCleanCoffee
   ],
   imports: [
     BrowserModule,
@@ -36,6 +37,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
+  ],
+  entryComponents: [
+    DialogConfirmCleanCoffee
   ],
   providers: [],
   bootstrap: [AppComponent]
