@@ -9,7 +9,11 @@ import {MatButtonModule,
   MatCardModule,
   MatChipsModule,
   MatTableModule,
-  MatDialogModule} from '@angular/material';
+  MatDialogModule,
+  MatExpansionModule} from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
+import { FormsModule }   from '@angular/forms';
+
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -35,8 +39,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatChipsModule,
     MatTableModule,
     MatDialogModule,
+    MatExpansionModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatIconModule,
+    FormsModule
   ],
   entryComponents: [
     DialogConfirmCleanCoffee

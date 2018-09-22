@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   theLast;
 
 
+
   constructor(
     private afs: AngularFirestore,
     public dialog: MatDialog
@@ -48,9 +49,9 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      
-      // this.animal = result;
-      // addFix();
+      if(result === true) {
+        this.addFix();
+      }
     });
   }
 
@@ -90,6 +91,9 @@ export class HomeComponent implements OnInit {
   templateUrl: 'dialog-confirm-clean-coffee.html',
 })
 export class DialogConfirmCleanCoffee {
+
+  checked=false;
+  checked2=false;
 
   constructor(public dialogRef: MatDialogRef<DialogConfirmCleanCoffee>) {}
 

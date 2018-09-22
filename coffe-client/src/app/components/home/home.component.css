@@ -18,7 +18,7 @@ mat-card {
 } */
 
 .clean-btn {
-    margin: 8px auto;
+    margin: 20px auto;
 }
 
 .history-btn {
@@ -27,4 +27,18 @@ mat-card {
 
 .card-text {
     margin: 8px 0px 8px;
+}
+
+.good-coffee-btn.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+    background-color: #27e427;
+}
+
+.horrible-coffee-btn.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+    background-color: #f0e334;
+    color: black;
+}
+
+.hazard-img {
+    width: 55px;
+
 }

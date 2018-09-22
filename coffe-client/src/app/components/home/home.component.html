@@ -1,11 +1,13 @@
 <div class="top-level">
-    <mat-toolbar class="top-bar">My App</mat-toolbar>
+    <mat-toolbar class="top-bar">Kaffe @ a4</mat-toolbar>
   
   <div>
     <mat-card *ngFor="let fix of fixes | async | slice:0:1" class="fix-card">
       <mat-chip-list>
-          <mat-chip color="primary" selected *ngIf="isOld(fix.timestamp)">Bra</mat-chip>
-          <mat-chip color="warn" selected *ngIf="!isOld(fix.timestamp)">Krise!</mat-chip>
+          <mat-chip class="good-coffee-btn" selected *ngIf="isOld(fix.timestamp)">OK</mat-chip>
+          <!-- <mat-chip class="horrible-coffee-btn" selected *ngIf="isOld(fix.timestamp)"><img *ngIf="isOld(fix.timestamp)" src="assets/warning.png" class="hazard-img"></mat-chip> -->
+          <img *ngIf="!isOld(fix.timestamp)" src="assets/warning.png" class="hazard-img">
+
       </mat-chip-list>
       <div>
         <p class="card-text">Kaffemaskin sisst rengjort:</p>
@@ -16,14 +18,27 @@
     
   <button mat-raised-button color="primary" (click)="openDialog()" class="clean-btn">Jeg rengjorde akkurat kaffetrakteren!</button>
   
-  <button mat-fab (click)="toggleHiddenFixHistory()" class="history-btn">Historie</button>
 
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Historie
+        </mat-panel-title>
+        <mat-panel-description>
+          Tidligere heltedåder
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-  <div [hidden]="hiddenFixHistory">
-      <mat-card *ngFor="let fix of fixes | async; let last = last" class="fix-card">
-          {{ fix.timestamp | date:'d, MM, y, HH:mm'}} | ({{timeSince(fix.timestamp)}} dager siden)
-      </mat-card>
-  </div>
+      <div>
+        <mat-card *ngFor="let fix of fixes | async; let last = last" class="fix-card">
+            {{ fix.timestamp | date:'d, MM, y, HH:mm'}} | ({{timeSince(fix.timestamp)}} dager siden)
+        </mat-card>
+    </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
 
 
 </div>

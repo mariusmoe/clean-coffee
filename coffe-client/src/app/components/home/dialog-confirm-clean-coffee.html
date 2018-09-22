@@ -1,7 +1,15 @@
-<h1 mat-dialog-title>Hi!</h1>
-<p>NYI checkboxes</p>
+<h1 mat-dialog-title>Er du sikker?!</h1>
+<hr>
+<p class="mat-body-2">Kaffemskinen må renses nøye! Har du husket følgende?</p>
 
+  
+    <mat-checkbox  [(ngModel)]="checked">Brukt Clean Drop<mat-icon>copyright</mat-icon></mat-checkbox>
+    <mat-checkbox [(ngModel)]="checked2">Gjort et grundig arbeid</mat-checkbox>
+  
+  
+<hr>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Nope</button>
-  <button mat-button (click)="onYesClick()" cdkFocusInitial>Yes</button>
+  <button mat-raised-button (click)="onNoClick()">Nope</button>
+  <button mat-raised-button color="primary" (click)="onYesClick()" [disabled]="!checked || !checked2">Yes</button>
 </div>
+
