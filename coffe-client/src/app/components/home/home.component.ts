@@ -10,10 +10,6 @@ import * as moment from 'moment';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
-export interface FixId extends Fix { id: string; }
-
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,7 +19,6 @@ export class HomeComponent implements OnInit {
 
   private fixesCollection: AngularFirestoreCollection<Fix>;
   fixes: Observable<Fix[]>;
-  lastFix: Observable<FixId[]>
   hiddenFixHistory = true;
   theLast;
 
