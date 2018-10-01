@@ -22,6 +22,7 @@ import { environment } from '../environments/environment';
 import { HomeComponent, DialogConfirmCleanCoffee } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     MatIconModule,
     FormsModule
   ],

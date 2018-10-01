@@ -3,5 +3,9 @@ service cloud.firestore {
     match /fixes/{fix} {
       allow read, write;
     }
+
+    match /fcmTokens/{token} {
+      allow write;
+    }
   }
 }
