@@ -5,6 +5,7 @@ import { AngularFireMessaging } from '@angular/fire/messaging';
 import { mergeMapTo } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs'
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,12 @@ export class MessagingService {
         data[userId] = token
         console.log(data);
         
-        this.angularFireDB.collection('fcmTokens').doc(userId).set({userId: token})
+        this.angularFireDB.collection('fcmTokens')
+          .doc(userId)
+          .set({
+            userId: token,
+            timestamp: firebase.database.ServerValue.TIMESTAMP
+          })
       })
   }
 
