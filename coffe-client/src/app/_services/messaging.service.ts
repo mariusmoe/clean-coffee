@@ -43,8 +43,7 @@ export class MessagingService {
         this.angularFireDB.collection('fcmTokens')
           .doc(userId)
           .set({
-            userId: token,
-            timestamp: firebase.database.ServerValue.TIMESTAMP
+            userId: token
           })
       })
   }
