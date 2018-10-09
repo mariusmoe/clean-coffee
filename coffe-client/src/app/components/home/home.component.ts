@@ -8,6 +8,7 @@ import { last, takeLast, mergeAll, map } from 'rxjs/operators'
 import * as moment from 'moment';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MessagingService } from '../../_services/messaging.service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private afs: AngularFirestore,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private messagingService: MessagingService
     ) {
     this.fixesCollection = afs.collection<Fix>('fixes', ref => ref.orderBy('timestamp', 'desc').limit(10));
     this.fixes = this.fixesCollection.valueChanges();
@@ -34,6 +36,10 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+  unsubscribeToPush() {
+    this.messagingService.requestDeleteToken();
   }
 
   openDialog(): void {

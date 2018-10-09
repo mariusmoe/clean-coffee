@@ -6,6 +6,7 @@ import { mergeMapTo } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs'
 import * as firebase from 'firebase';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -74,5 +75,36 @@ export class MessagingService {
         console.log("new message received. ", payload);
         this.currentMessage.next(payload);
       })
+  }
+
+
+  deleteToken() {
+    this.angularFireDB.collection('fcmTokens')
+    .doc(this.angularFireAuth.auth.currentUser.uid)
+    .delete()
+    .then(() => {console.log('Delete success')})
+    .catch( (err) => {
+      console.error('Could not delete on server: ', err);
+    })
+  }
+
+
+  /**
+   * Request the removel of local token and fcm token in server
+   */
+  requestDeleteToken() {
+    this.angularFireMessaging.getToken
+      .pipe(mergeMap(token => this.angularFireMessaging.deleteToken(token)))
+      .subscribe(
+        (token) => { 
+          // Delete from db by calling delete Token() ???
+          console.log('Deleted!'); 
+          console.log(token);
+          this.deleteToken();
+        },
+        (err) => {
+          console.error('Unable to remove token!', err)
+        }
+      );
   }
 }
