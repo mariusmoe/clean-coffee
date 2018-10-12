@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireMessaging } from '@angular/fire/messaging';
-import { mergeMapTo } from 'rxjs/operators';
+import { mergeMapTo, map } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs'
 import * as firebase from 'firebase';
 import { mergeMap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +15,31 @@ import { mergeMap } from 'rxjs/operators';
 export class MessagingService {
 
   currentMessage = new BehaviorSubject(null);
+  public token = new BehaviorSubject(null);
+  public _userCredentials: any;
 
   constructor(
     private angularFireDB: AngularFirestore,
     private angularFireAuth: AngularFireAuth,
-    private angularFireMessaging: AngularFireMessaging) {
+    private angularFireMessaging: AngularFireMessaging,
+    public snackBar: MatSnackBar) {
     this.angularFireMessaging.messaging.subscribe(
       (_messaging) => {
         _messaging.onMessage = _messaging.onMessage.bind(_messaging);
         _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
       }
     )
+  }
+  set userCredentials(userCredentials: firebase.auth.UserCredential) {
+    this._userCredentials = userCredentials;
+  }
+
+  get userCredentials() {
+    return this._userCredentials;
+  }
+
+  get isSubscribed() {
+    return this.angularFireMessaging.getToken.pipe(map(token => {return token}));
   }
 
   /**
@@ -57,10 +72,12 @@ export class MessagingService {
   requestPermission(userId) {
     this.angularFireMessaging.requestToken.subscribe(
       (token) => {
-        console.log(token);
+        this.token.next(token);
         this.updateToken(userId, token);
       },
       (err) => {
+        // Show snack bar error
+        this.openSnackBar("Unable to get permission to notify - Try to allow notifications", "ok")
         console.error('Unable to get permission to notify.', err);
       }
     );
@@ -82,8 +99,10 @@ export class MessagingService {
     this.angularFireDB.collection('fcmTokens')
     .doc(this.angularFireAuth.auth.currentUser.uid)
     .delete()
-    .then(() => {console.log('Delete success')})
-    .catch( (err) => {
+    .then( () => {
+      console.log('Delete success')
+    })
+    .catch((err) => {
       console.error('Could not delete on server: ', err);
     })
   }
@@ -106,5 +125,11 @@ export class MessagingService {
           console.error('Unable to remove token!', err)
         }
       );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
   }
 }

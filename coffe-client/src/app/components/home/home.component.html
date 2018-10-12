@@ -1,6 +1,23 @@
 <div class="top-level">
-    <mat-toolbar class="top-bar">Kaffe @ a4</mat-toolbar>
-    <button mat-raised-button color="primary" (click)="unsubscribeToPush()" class="clean-btn">Avslutt abonement på kaffeoppdateringer</button>
+    <mat-toolbar class="top-bar">
+      <h1>Kaffe @ a4</h1>
+      <button 
+        mat-raised-button 
+        (click)="unsubscribeToPush()" 
+        class="abort-subscription-btn"
+        *ngIf="isSubscribedToCoffeeUpdates"
+        >
+        Avslutt kaffeoppdateringer
+      </button>
+      <button 
+      mat-raised-button 
+      (click)="subscribeToPush()" 
+      class="abort-subscription-btn"
+      *ngIf="!isSubscribedToCoffeeUpdates"
+      >
+      Abboner på kaffeoppdateringer
+    </button>
+    </mat-toolbar>
   <div>
     <mat-card *ngFor="let fix of fixes | async | slice:0:1" class="fix-card">
       <mat-chip-list>

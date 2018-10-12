@@ -22,7 +22,9 @@ export class HomeComponent implements OnInit {
   fixes: Observable<Fix[]>;
   hiddenFixHistory = true;
   theLast;
-
+  isSubscribedToCoffeeUpdates = false;
+  loading = true;
+  message;
 
 
   constructor(
@@ -35,11 +37,26 @@ export class HomeComponent implements OnInit {
     
    }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.messagingService.token.subscribe(value => {
+      if (value) {
+        this.isSubscribedToCoffeeUpdates = true;
+      } else {
+        this.isSubscribedToCoffeeUpdates = false;
+      }
+    })
   }
 
   unsubscribeToPush() {
     this.messagingService.requestDeleteToken();
+    this.isSubscribedToCoffeeUpdates = false;
+  }
+
+  subscribeToPush() {
+    const userId = this.messagingService._userCredentials.user.uid;
+      this.messagingService.requestPermission(userId)
+      this.messagingService.receiveMessage()
+      this.message = this.messagingService.currentMessage
   }
 
   openDialog(): void {

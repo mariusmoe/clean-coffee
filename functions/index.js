@@ -37,7 +37,7 @@ exports.ready = functions.https.onRequest((req, res) => {
         let z = false;
        
         console.log("Document data:", sendTimeA4.data());
-        if((timeNow.seconds - admin.firestore.Timestamp.fromDate(sendTimeA4.data().timestamp).seconds) < 1800 && z) {
+        if((timeNow.seconds - admin.firestore.Timestamp.fromDate(sendTimeA4.data().timestamp).seconds) < 1800 ) { //&& z) {
             console.log("TOO SOON");
             return res.send({'Status: ': 'TOO SOON'});
         } else {

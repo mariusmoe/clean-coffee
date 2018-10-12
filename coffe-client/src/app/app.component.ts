@@ -25,6 +25,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.authService.login().then(userCredentials => {
+      this.messagingService._userCredentials = userCredentials;
       const userId = userCredentials.user.uid;
       this.messagingService.requestPermission(userId)
       this.messagingService.receiveMessage()

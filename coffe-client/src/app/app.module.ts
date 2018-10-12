@@ -10,7 +10,8 @@ import {MatButtonModule,
   MatChipsModule,
   MatTableModule,
   MatDialogModule,
-  MatExpansionModule} from '@angular/material';
+  MatExpansionModule,
+  MatSnackBarModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule }   from '@angular/forms';
 
@@ -43,6 +44,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     MatDialogModule,
     MatExpansionModule,
     AngularFireMessagingModule,
+    MatSnackBarModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,

@@ -6,6 +6,7 @@ export const environment = {
     databaseURL: 'https://coffee-a4.firebaseio.com',
     projectId: 'coffee-a4',
     storageBucket: 'coffee-a4.appspot.com',
-    messagingSenderId: '954094612713'
+    messagingSenderId: '954094612713',
+    timestampsInSnapshots: true
   }
 };
