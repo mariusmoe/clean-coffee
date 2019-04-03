@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   private fixesCollection: AngularFirestoreCollection<Fix>;
   fixes: Observable<Fix[]>;
-  hiddenFixHistory = true;
+  hiddenFixHistory = false;
   theLast;
   isSubscribedToCoffeeUpdates = false;
   loading = true;

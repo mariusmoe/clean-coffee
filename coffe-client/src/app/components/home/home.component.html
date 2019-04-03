@@ -36,25 +36,17 @@
   <button mat-raised-button color="primary" (click)="openDialog()" class="clean-btn">Jeg rengjorde akkurat kaffetrakteren!</button>
   
 
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Historie
-        </mat-panel-title>
-        <mat-panel-description>
-          Tidligere heltedåder
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
+  <mat-card>
+    <mat-card-title class="historie-title">
+      Historie
+    </mat-card-title>
       <div>
         <mat-card *ngFor="let fix of fixes | async; let last = last" class="fix-card">
             {{ fix.timestamp | date:'d, MM, y, HH:mm'}} | ({{timeSince(fix.timestamp)}} dager siden)
         </mat-card>
     </div>
 
-    </mat-expansion-panel>
-  </mat-accordion>
+  </mat-card>
 
 
 
